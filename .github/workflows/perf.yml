@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-         run: |
+        run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -39,14 +39,14 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
           
-            - name: Run Performance test using Google  Page Speed Insights     
-      env:
-        PAGE_SPEED_API_KEY: ${{ secrets.API_KEY }}
-      run: |
-        python app.py -k ${PAGE_SPEED_API_KEY}
-    - name: Commit latest release version
-      run: |
-        git config --global user.name 'Rahul25599'
-        git config --global user.email 'gopi.y@shaftsoftwares.com'
-        git commit -am "Updated the results"
-        git push
+      - name: Run Performance test using Google  Page Speed Insights     
+        env:
+         PAGE_SPEED_API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          python Main.py -k ${PAGE_SPEED_API_KEY}
+      - name: Commit latest release version
+        run: |
+          git config --global user.name 'Rahul25599'
+          git config --global user.email 'gopi.y@shaftsoftwares.com'
+          git commit -am "Updated the results"
+          git push
