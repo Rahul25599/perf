@@ -41,9 +41,13 @@ jobs:
           
       - name: Run Performance test using Google  Page Speed Insights     
         env:
-         PAGE_SPEED_API_KEY: ${{ secrets.API_KEY }}
+         PAGE_SPEED_API_KEY: ${{ secrets.PAGE_INSIGHTS_API_KEY }}
+         ORGANIZATION_NAME: $({secrets.ORG_NAME})
+         INFLUX_DB_URL: $({secrets.INFLUX_URL})
+         INFLUX_DB_SECRET_API: $({secrets.INFLUX_DB_SECRET_API})
+         BUCKET_NAME: $({secrets.BUCKET_NAME})
         run: |
-          python Main.py -k ${PAGE_SPEED_API_KEY}
+          python Main.py -k ${PAGE_SPEED_API_KEY} ${ORGANIZATION_NAME} ${INFLUX_DB_URL} ${INFLUX_DB_SECRET_API} ${BUCKET_NAME}
       - name: Commit latest release version
         run: |
           git config --global user.name 'Rahul25599'
